@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>2048 with AI</title>
+
+    <link href="style/main.css" rel="stylesheet" type="text/css">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="apple-touch-icon" href="meta/apple-touch-icon.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+
+    <meta name="viewport" content="width=425, initial-scale=1.0">
+    <meta name="description" content="The 2048 game with AI players">
+
+    <script type="text/javascript" defer src="js/keyboard_input_manager.js"></script>
+    <script type="text/javascript" defer src="js/html_actuator.js"></script>
+    <script type="text/javascript" defer src="js/grid.js"></script>
+    <script type="text/javascript" defer src="js/tile.js"></script>
+    <script type="text/javascript" defer src="js/local_storage_manager.js"></script>
+    <script type="text/javascript" defer src="js/game_manager.js"></script>
+    <script type="text/javascript" defer src="js/main.js"></script>
+    <script type="text/javascript" defer src="js/index.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="heading">
+            <h1 class="title">2048 AI</h1>
+            <div class="scores-container">
+                <div class="score-container">0</div>
+                <div class="best-container">0</div>
+            </div>
+        </div>
+
+        <div class="above-game">
+            <p class="game-intro">Join the numbers and get to the <strong>2048 tile!</strong></p>
+            <a class="restart-button">New Game</a>
+        </div>
+
+        <div class="game-container">
+            <div class="game-message">
+                <p></p>
+                <div class="lower">
+                    <a class="keep-playing-button">Keep going</a>
+                    <a class="retry-button">Try again</a>
+                </div>
+            </div>
+
+            <div class="grid-container">
+                <div class="grid-row">
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                </div>
+                <div class="grid-row">
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                </div>
+                <div class="grid-row">
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                </div>
+                <div class="grid-row">
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                    <div class="grid-cell"></div>
+                </div>
+            </div>
+
+            <div class="tile-container">
+
+            </div>
+        </div>
+
+        <div id="controlsContainer">
+            <div>
+                <h2>AI Player</h2>
+                <input type="radio" id="aiOn" name="ai_player" checked>
+                <label for="aiOn">On</label>
+                <input type="radio" id="aiOff" name="ai_player">
+                <label for="aiOff">Off</label>
+                <br>
+                <br>
+                <label for="pauseTime">Pause time between moves (in milliseconds): </label>
+                <input type="number" id="pauseTime" min="0" max="10000" value="50" required>
+                <br>
+                <small>This is a <i>minimum</i> pause time, and the AI might spend more time thinking than this
+                    value.</small>
+                <br>
+                <h3>AI Strength</h3>
+                <input type="radio" id="aiStrengthFast" name="ai_strength" value="0">
+                <label for="aiStrengthFast">Fast</label>
+                <br>
+                <input type="radio" id="aiStrengthNormal" name="ai_strength" value="1" checked>
+                <label for="aiStrengthNormal">Normal</label>
+                <br>
+                <input type="radio" id="aiStrengthStrong" name="ai_strength" value="2">
+                <label for="aiStrengthStrong">Strong</label>
+            </div>
+            <div>
+                <h3>AI Strategy</h3>
+                <input type="radio" id="expectimaxDepthStrategy" name="ai_strategy" value="0" data-heuristic="true"
+                    checked>
+                <label for="expectimaxDepthStrategy">Expectimax (search by depth)</label>
+                <small class="description"><br>The <a href="https://en.wikipedia.org/wiki/Expectiminimax"
+                        target="_blank">expectimax</a> search algorithm, searching to a certain depth</small>
+                <br>
+                <input type="radio" id="minimaxStrategy" name="ai_strategy" value="1" data-heuristic="true">
+                <label for="minimaxStrategy">Minimax</label>
+                <small class="description"><br>The <a href="https://en.wikipedia.org/wiki/Minimax"
+                        target="_blank">minimax</a> search algorithm, which assumes that tiles are placed
+                    adversarially</small>
+                <br>
+                <div id="heuristicContainer">
+                    <h3>Heuristic</h3>
+                    <input type="radio" id="cornerHeuristic" name="ai_heuristic" value="2" checked>
+                    <label for="cornerHeuristic">Corner Building</label>
+                    <small class="description"><br>Strong heuristic based on tile values, with higher weights for tiles
+                        in the corner</small>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
